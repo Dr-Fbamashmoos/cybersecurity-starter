@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A beginner-friendly cybersecurity learning path using selected IBM Technology videos." />
+  <title>Cybersecurity Starter Path</title>
+  <style>
+/* Cybersecurity Starter Path
+   Light, calm, beginner-friendly and GitHub Pages-ready.
+*/
+
+:root {
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --surface-blue: #f1f7ff;
+  --text: #1d2939;
+  --heading: #102a43;
+  --muted: #66788a;
+  --border: #e2e8f0;
+  --primary: #2563eb;
+  --primary-dark: #1d4ed8;
+  --primary-soft: #eaf2ff;
+  --green: #16805c;
+  --green-soft: #eaf8f2;
+  --rose: #b5475f;
+  --rose-soft: #fff1f4;
+  --violet: #6558d3;
+  --violet-soft: #f1efff;
+  --shadow: 0 10px 30px rgba(30, 64, 175, 0.07);
+  --shadow-hover: 0 18px 42px rgba(30, 64, 175, 0.11);
+  --max: 1160px;
+  --radius: 20px;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 90% 0%, rgba(37, 99, 235, 0.06), transparent 24rem),
+    radial-gradient(circle at 10% 15%, rgba(22, 128, 92, 0.05), transparent 22rem),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+.container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+.hero {
+  min-height: 700px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.96), rgba(246,248,251,0.93)),
+    radial-gradient(circle at 78% 22%, rgba(37,99,235,0.12), transparent 22rem);
+  border-bottom: 1px solid var(--border);
+}
+.nav { min-height: 78px; display: flex; align-items: center; justify-content: space-between; }
+.brand { display: inline-flex; gap: 11px; align-items: center; color: var(--heading); font-weight: 800; letter-spacing: -0.02em; }
+.brand-mark {
+  width: 38px; height: 38px; display: grid; place-items: center; border-radius: 11px;
+  background: var(--primary-soft); color: var(--primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-weight: 800;
+}
+.nav-link {
+  padding: 9px 13px; border: 1px solid var(--border); border-radius: 10px;
+  background: rgba(255,255,255,0.72); color: #4b6175; font-size: 0.9rem; font-weight: 650; transition: 0.2s ease;
+}
+.nav-link:hover { color: var(--primary); border-color: #cbdaf7; background: #fff; }
+.hero-content { padding: 100px 0 86px; }
+.eyebrow, .section-label { color: var(--primary); font-size: 0.74rem; font-weight: 850; letter-spacing: 0.13em; }
+.hero h1 {
+  margin: 17px 0 24px; max-width: 850px; color: var(--heading);
+  font-size: clamp(3.1rem, 7.5vw, 6.2rem); line-height: 0.98; letter-spacing: -0.058em;
+}
+.hero h1 span { color: var(--primary); }
+.hero-copy { max-width: 700px; color: var(--muted); font-size: 1.12rem; }
+.quick-tip {
+  width: fit-content; max-width: 700px; margin-top: 24px; padding: 12px 15px;
+  display: flex; align-items: center; gap: 10px; border: 1px solid #cfe9df; border-radius: 12px;
+  background: var(--green-soft); color: #315f50; font-size: 0.9rem;
+}
+.tip-icon {
+  width: 24px; height: 24px; flex: 0 0 24px; display: grid; place-items: center; border-radius: 50%;
+  background: #d6f2e5; color: var(--green); font-weight: 900;
+}
+.hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 34px; }
+.button {
+  min-height: 48px; padding: 0 20px; display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 12px; font-size: 0.93rem; font-weight: 750;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.button:hover { transform: translateY(-2px); }
+.primary { background: var(--primary); color: #fff; box-shadow: 0 8px 18px rgba(37,99,235,0.18); }
+.primary:hover { background: var(--primary-dark); box-shadow: 0 12px 24px rgba(37,99,235,0.24); }
+.secondary { background: #fff; border: 1px solid var(--border); color: var(--heading); }
+.secondary:hover { box-shadow: var(--shadow); }
+.stats {
+  width: fit-content; display: flex; gap: 0; margin-top: 64px; overflow: hidden;
+  border: 1px solid var(--border); border-radius: 16px; background: rgba(255,255,255,0.8);
+  box-shadow: 0 6px 22px rgba(15,23,42,0.04);
+}
+.stats div { min-width: 120px; padding: 14px 22px; display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+.stats div:last-child { border-right: 0; }
+.stats strong { color: var(--heading); font-size: 1.5rem; line-height: 1.1; }
+.stats span { margin-top: 3px; color: var(--muted); font-size: 0.76rem; }
+
+.intro, .week, .explore, .final-note { padding: 92px 0; }
+.intro { border-bottom: 1px solid var(--border); }
+.intro-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 48px; align-items: center; margin-top: 18px; }
+.intro h2, .explore h2 { margin: 0; color: var(--heading); font-size: clamp(2.2rem, 4.6vw, 4rem); line-height: 1.07; letter-spacing: -0.042em; }
+.intro h2 span { color: var(--primary); }
+.note-card { padding: 28px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--muted); box-shadow: var(--shadow); }
+.note-card strong { color: var(--heading); }
+.small { margin-bottom: 0; color: #7b8b99; font-size: 0.88rem; }
+
+.week { border-bottom: 1px solid var(--border); }
+.week-heading { display: flex; gap: 40px; justify-content: space-between; align-items: flex-end; margin-bottom: 34px; }
+.week-heading > div { display: flex; align-items: center; gap: 18px; }
+.week-heading p { max-width: 430px; margin: 0; color: var(--muted); }
+.week-number {
+  width: 62px; height: 62px; flex: 0 0 62px; display: grid; place-items: center; border-radius: 17px;
+  background: var(--primary-soft); color: var(--primary);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 1.35rem; font-weight: 850;
+}
+.week h2 { margin: 5px 0 0; color: var(--heading); font-size: 2rem; letter-spacing: -0.03em; }
+.cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.cards.three { grid-template-columns: repeat(3, 1fr); }
+.single-row { margin-top: 20px; grid-template-columns: repeat(2, 1fr); }
+.single-row .video-card { grid-column: 1 / 2; }
+
+.video-card {
+  min-height: 430px; padding: 26px; display: flex; flex-direction: column;
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+  box-shadow: 0 4px 16px rgba(15,23,42,0.035);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+.video-card:hover { transform: translateY(-4px); border-color: #c9d8ee; box-shadow: var(--shadow-hover); }
+.video-card.featured { background: linear-gradient(180deg, #ffffff, #fbfcff); border-color: #d8e4f7; }
+.card-top { display: flex; justify-content: space-between; align-items: center; }
+.tag { display: inline-block; padding: 6px 9px; border-radius: 7px; background: var(--primary-soft); color: var(--primary); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.075em; }
+.tag.danger { background: var(--rose-soft); color: var(--rose); }
+.tag.success { background: var(--green-soft); color: var(--green); }
+.tag.modern { background: var(--violet-soft); color: var(--violet); }
+input[type="checkbox"] { width: 21px; height: 21px; accent-color: var(--green); cursor: pointer; }
+.video-number { margin-top: 38px; color: #9cabb9; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.82rem; font-weight: 700; }
+.video-card h3 { margin: 6px 0 11px; color: var(--heading); font-size: 1.48rem; line-height: 1.15; letter-spacing: -0.024em; }
+.description { margin-top: 0; color: var(--muted); font-size: 0.95rem; }
+.focus { margin-top: auto; padding: 17px 0; border-top: 1px solid var(--border); }
+.focus span { color: var(--primary); font-size: 0.64rem; font-weight: 850; letter-spacing: 0.095em; }
+.focus p { margin: 4px 0 0; color: #43566a; font-size: 0.9rem; }
+.watch {
+  min-height: 46px; padding: 0 15px; display: flex; align-items: center; justify-content: space-between;
+  border-radius: 11px; background: var(--surface-blue); color: var(--primary); font-size: 0.88rem; font-weight: 750; transition: 0.2s ease;
+}
+.watch:hover { background: #e7f0ff; }
+
+.explore { padding-bottom: 72px; }
+.explore-copy { max-width: 790px; margin-bottom: 38px; }
+.explore-copy p { max-width: 640px; color: var(--muted); }
+.career-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.career { min-height: 180px; padding: 23px; background: var(--surface); border: 1px solid var(--border); border-radius: 17px; box-shadow: 0 3px 12px rgba(15,23,42,0.03); }
+.career span { display: inline-grid; width: 30px; height: 30px; place-items: center; border-radius: 9px; background: var(--primary-soft); color: var(--primary); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.7rem; font-weight: 800; }
+.career h3 { margin: 28px 0 6px; color: var(--heading); }
+.career p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+.final-note { text-align: center; }
+.quote { max-width: 850px; margin: 0 auto 30px; color: var(--heading); font-size: clamp(1.45rem, 3vw, 2.25rem); line-height: 1.35; letter-spacing: -0.03em; }
+footer { background: #fff; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; }
+.footer-content { min-height: 82px; display: flex; justify-content: space-between; align-items: center; }
+
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid rgba(37,99,235,0.25); outline-offset: 3px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+@media (max-width: 930px) {
+  .intro-grid, .cards, .cards.three, .single-row, .career-grid { grid-template-columns: 1fr 1fr; }
+  .single-row .video-card { grid-column: 1 / 2; }
+  .week-heading { align-items: flex-start; flex-direction: column; gap: 16px; }
+}
+
+@media (max-width: 680px) {
+  .container { width: min(var(--max), calc(100% - 28px)); }
+  .nav { min-height: 70px; }
+  .nav-link { font-size: 0.8rem; }
+  .hero { min-height: auto; }
+  .hero-content { padding: 72px 0 64px; }
+  .hero h1 { font-size: clamp(2.75rem, 14vw, 4.2rem); }
+  .hero-copy { font-size: 1rem; }
+  .stats { width: 100%; }
+  .stats div { flex: 1; min-width: 0; padding: 13px; }
+  .intro, .week, .explore, .final-note { padding: 70px 0; }
+  .intro-grid, .cards, .cards.three, .single-row, .career-grid { grid-template-columns: 1fr; }
+  .single-row .video-card { grid-column: auto; }
+  .week-heading > div { align-items: flex-start; }
+  .week-number { width: 52px; height: 52px; flex-basis: 52px; border-radius: 14px; }
+  .video-card { min-height: 410px; padding: 23px; }
+  .footer-content { padding: 22px 0; align-items: flex-start; gap: 7px; flex-direction: column; justify-content: center; }
+}
+
+</style>
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav container">
+      <a class="brand" href="#top" aria-label="Cybersecurity Starter Path home">
+        <span class="brand-mark">&gt;_</span>
+        <span>Cyber Starter</span>
+      </a>
+      <a class="nav-link" href="https://www.youtube.com/@IBMTechnology" target="_blank" rel="noopener">IBM Technology ↗</a>
+    </nav>
+
+    <div class="container hero-content" id="top">
+      <div class="eyebrow">BEGINNER • FIRST-YEAR FRIENDLY</div>
+      <h1>Start Exploring<br /><span>Cybersecurity.</span></h1>
+      <p class="hero-copy">
+        A calm, beginner-friendly 4-week journey to understand how cybersecurity works,
+        what attackers do, and how organizations protect people, systems, and data.
+      </p>
+      <div class="quick-tip">
+        <span class="tip-icon">✓</span>
+        <span>Watch in order. Aim for 2–3 videos each week. No memorization needed.</span>
+      </div>
+
+      <div class="hero-actions">
+        <a class="button primary" href="#week-1">Start the Path</a>
+        <a class="button secondary" href="#big-picture">See the Big Picture</a>
+      </div>
+
+      <div class="stats" aria-label="Learning path summary">
+        <div><strong>4</strong><span>Weeks</span></div>
+        <div><strong>11</strong><span>Videos</span></div>
+        <div><strong>0</strong><span>Prerequisites</span></div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container intro" id="big-picture">
+      <div class="section-label">BEFORE YOU START</div>
+      <div class="intro-grid">
+        <div>
+          <h2>Your goal is to understand the <span>big picture</span>.</h2>
+        </div>
+        <div class="note-card">
+          <p>
+            <strong>Do not try to memorize everything.</strong> Watch each video to understand the idea,
+            connect it to the previous topic, and notice which areas of cybersecurity interest you most.
+          </p>
+          <p class="small">Suggested pace: 2–3 videos per week.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container week" id="week-1">
+      <div class="week-heading">
+        <div>
+          <span class="week-number">01</span>
+          <div>
+            <div class="section-label">WEEK ONE</div>
+            <h2>Understand Security</h2>
+          </div>
+        </div>
+        <p>First understand what we protect and the principles behind good security.</p>
+      </div>
+
+      <div class="cards">
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag">FOUNDATION</span>
+            <input type="checkbox" aria-label="Mark CIA Triad complete" />
+          </div>
+          <div class="video-number">01</div>
+          <h3>What is the CIA Triad?</h3>
+          <p class="description">Learn the three goals behind information security: Confidentiality, Integrity, and Availability.</p>
+          <div class="focus">
+            <span>FOCUS ON</span>
+            <p>Why do these three ideas appear in almost every cybersecurity topic?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=kPPFNrlN3zo" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag">PRINCIPLES</span>
+            <input type="checkbox" aria-label="Mark security principles complete" />
+          </div>
+          <div class="video-number">02</div>
+          <h3>Five Cybersecurity Principles</h3>
+          <p class="description">Build your security mindset with concepts such as least privilege and defense in depth.</p>
+          <div class="focus">
+            <span>FOCUS ON</span>
+            <p>Why is one security control never enough?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=jq_LZ1RFPfU" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container week" id="week-2">
+      <div class="week-heading">
+        <div>
+          <span class="week-number">02</span>
+          <div>
+            <div class="section-label">WEEK TWO</div>
+            <h2>Understand Attacks</h2>
+          </div>
+        </div>
+        <p>See how attackers target people and computers—and how one attack can lead to another.</p>
+      </div>
+
+      <div class="cards three">
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag danger">HUMAN ATTACK</span>
+            <input type="checkbox" aria-label="Mark phishing complete" />
+          </div>
+          <div class="video-number">03</div>
+          <h3>What is Phishing?</h3>
+          <p class="description">Learn how attackers use messages, urgency, and deception to trick people.</p>
+          <div class="focus">
+            <span>THINK ABOUT</span>
+            <p>What signs would make you distrust an email or message?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=gWGhUdHItto" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag danger">MALICIOUS SOFTWARE</span>
+            <input type="checkbox" aria-label="Mark malware complete" />
+          </div>
+          <div class="video-number">04</div>
+          <h3>What is Malware?</h3>
+          <p class="description">Understand malicious software and how attackers try to compromise devices and systems.</p>
+          <div class="focus">
+            <span>FOCUS ON</span>
+            <p>How can malware reach a computer in the first place?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=mqzP7gJDM2s" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag danger">REAL-WORLD ATTACK</span>
+            <input type="checkbox" aria-label="Mark ransomware complete" />
+          </div>
+          <div class="video-number">05</div>
+          <h3>What is Ransomware?</h3>
+          <p class="description">Explore an attack that can lock data and disrupt an entire organization.</p>
+          <div class="focus">
+            <span>THINK ABOUT</span>
+            <p>Why can ransomware become a business crisis, not just an IT problem?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=lIsWpCMBxHQ" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container week" id="week-3">
+      <div class="week-heading">
+        <div>
+          <span class="week-number">03</span>
+          <div>
+            <div class="section-label">WEEK THREE</div>
+            <h2>Understand Defenses</h2>
+          </div>
+        </div>
+        <p>Now switch sides: how do we protect identities, networks, and data?</p>
+      </div>
+
+      <div class="cards three">
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag success">IDENTITY</span>
+            <input type="checkbox" aria-label="Mark MFA complete" />
+          </div>
+          <div class="video-number">06</div>
+          <h3>Multi-Factor Authentication</h3>
+          <p class="description">See why a password alone is often not enough to protect an account.</p>
+          <div class="focus">
+            <span>FOCUS ON</span>
+            <p>Something you know, something you have, and something you are.</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=L3alw3iXaio" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag success">ACCESS</span>
+            <input type="checkbox" aria-label="Mark IAM complete" />
+          </div>
+          <div class="video-number">07</div>
+          <h3>Identity &amp; Access Management</h3>
+          <p class="description">Learn how organizations decide who you are and what you are allowed to access.</p>
+          <div class="focus">
+            <span>FOCUS ON</span>
+            <p>Authentication vs. authorization. They are not the same thing.</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=5uNifnVlBy4" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag success">NETWORK</span>
+            <input type="checkbox" aria-label="Mark network security complete" />
+          </div>
+          <div class="video-number">08</div>
+          <h3>Network Security</h3>
+          <p class="description">Meet firewalls, VPNs, network traffic, packets, and some of the defenses around them.</p>
+          <div class="focus">
+            <span>FOCUS ON</span>
+            <p>What does a firewall actually protect, and where does it sit?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=sesacY7Xz3c" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+      </div>
+
+      <div class="cards single-row">
+        <article class="video-card">
+          <div class="card-top">
+            <span class="tag success">DATA</span>
+            <input type="checkbox" aria-label="Mark data security complete" />
+          </div>
+          <div class="video-number">09</div>
+          <h3>Data Security</h3>
+          <p class="description">Understand why organizations treat important data as their “crown jewels.”</p>
+          <div class="focus">
+            <span>THINK ABOUT</span>
+            <p>If you were defending a university, which data would you protect first?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=UpkqXK0B2E0" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container week" id="week-4">
+      <div class="week-heading">
+        <div>
+          <span class="week-number">04</span>
+          <div>
+            <div class="section-label">WEEK FOUR</div>
+            <h2>See the Bigger Picture</h2>
+          </div>
+        </div>
+        <p>Finish with two ideas used across modern security teams and organizations.</p>
+      </div>
+
+      <div class="cards">
+        <article class="video-card featured">
+          <div class="card-top">
+            <span class="tag modern">MODERN SECURITY</span>
+            <input type="checkbox" aria-label="Mark Zero Trust complete" />
+          </div>
+          <div class="video-number">10</div>
+          <h3>Zero Trust</h3>
+          <p class="description">Explore a modern security approach built around continuous verification instead of assumed trust.</p>
+          <div class="focus">
+            <span>KEY IDEA</span>
+            <p>Never trust automatically. Verify users, devices, and access.</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=yn6CPQ9RioA" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+
+        <article class="video-card featured">
+          <div class="card-top">
+            <span class="tag modern">DETECTION</span>
+            <input type="checkbox" aria-label="Mark SIEM complete" />
+          </div>
+          <div class="video-number">11</div>
+          <h3>What is SIEM?</h3>
+          <p class="description">See how security teams collect and analyze events to detect suspicious activity.</p>
+          <div class="focus">
+            <span>THINK ABOUT</span>
+            <p>How can one security team watch thousands of devices at the same time?</p>
+          </div>
+          <a class="watch" href="https://www.youtube.com/watch?v=9RfsRn7m7OE" target="_blank" rel="noopener">Watch on YouTube <span>↗</span></a>
+        </article>
+      </div>
+    </section>
+
+    <section class="container explore">
+      <div class="explore-copy">
+        <div class="section-label">AFTER THE PATH</div>
+        <h2>Which side of cybersecurity sounds interesting?</h2>
+        <p>You do not need to choose now. Just notice which topics make you want to learn more.</p>
+      </div>
+
+      <div class="career-grid">
+        <div class="career"><span>01</span><h3>Security Operations</h3><p>Monitoring, detection, SIEM, incident response.</p></div>
+        <div class="career"><span>02</span><h3>Network Security</h3><p>Firewalls, VPNs, segmentation, secure infrastructure.</p></div>
+        <div class="career"><span>03</span><h3>Ethical Hacking</h3><p>Finding weaknesses before attackers do.</p></div>
+        <div class="career"><span>04</span><h3>Cloud Security</h3><p>Protecting systems and data in cloud environments.</p></div>
+        <div class="career"><span>05</span><h3>Identity Security</h3><p>Accounts, authentication, permissions, access control.</p></div>
+        <div class="career"><span>06</span><h3>Digital Forensics</h3><p>Investigating what happened after a security incident.</p></div>
+      </div>
+    </section>
+
+    <section class="container final-note">
+      <p class="quote">“You do not have to become a hacker to work in cybersecurity. Start by understanding how systems work, how they fail, and how we protect them.”</p>
+      <a class="button primary" href="https://www.youtube.com/@IBMTechnology" target="_blank" rel="noopener">Explore IBM Technology ↗</a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <span>Cybersecurity Starter Path</span>
+      <span>Built for learning • Start curious.</span>
+    </div>
+  </footer>
+</body>
+</html>
